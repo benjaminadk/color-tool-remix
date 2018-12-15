@@ -1,0 +1,31 @@
+{
+  "name": "electron-picker-remix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/main/main.js",
+  "scripts": {
+    "dev": "electron-webpack dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "color-string": "^1.5.3",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-prompt": "^1.2.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "rgb-to-hsl": "0.0.3",
+    "styled-components": "^4.1.2",
+    "styled-icons": "^5.4.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/preset-react": "^7.0.0",
+    "electron": "^3.0.11",
+    "electron-builder": "^20.38.2",
+    "electron-webpack": "^2.6.1",
+    "webpack": "^4.27.1"
+  }
+}
