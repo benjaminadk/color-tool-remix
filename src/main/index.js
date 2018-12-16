@@ -88,7 +88,7 @@ function sendToRenderer(msg) {
 }
 
 function openDocumentation() {
-  shell.openExternal('https://github.com/benjaminadk/color-picker-remix')
+  shell.openExternal('https://github.com/benjaminadk/color-tool-remix')
 }
 
 if (!firstInstance) {

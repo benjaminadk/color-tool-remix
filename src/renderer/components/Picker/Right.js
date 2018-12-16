@@ -87,7 +87,7 @@ export default props => (
         <RefreshIcon />
       </Button>
       <Button
-        onClick={() => shell.openExternal('https://github.com/benjaminadk/color-picker-remix')}
+        onClick={() => shell.openExternal('https://github.com/benjaminadk/color-tool-remix')}
         title="Help"
       >
         <HelpIcon />
