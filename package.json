@@ -1,22 +1,27 @@
 {
   "name": "electron-picker-remix",
   "version": "1.0.0",
-  "description": "",
+  "description": "A comprehensive desktop color ulitity",
+  "repository": "https://github.com/benjaminadk/color-tool-remix",
   "main": "./dist/main/main.js",
   "scripts": {
-    "dev": "electron-webpack dev"
+    "dev": "electron-webpack dev",
+    "compile": "electron-webpack",
+    "release": "electron-builder -p onTagOrDraft"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "benjaminadk",
+  "license": "MIT",
   "dependencies": {
     "color-string": "^1.5.3",
     "electron-devtools-installer": "^2.2.4",
     "electron-prompt": "^1.2.0",
+    "electron-updater": "^4.0.6",
     "prop-types": "^15.6.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "rgb-to-hsl": "0.0.3",
+    "source-map-support": "^0.5.9",
     "styled-components": "^4.1.2",
     "styled-icons": "^5.4.0"
   },
@@ -27,5 +32,22 @@
     "electron-builder": "^20.38.2",
     "electron-webpack": "^2.6.1",
     "webpack": "^4.27.1"
+  },
+  "build": {
+    "appId": "com.electron.color-tool-remix",
+    "productName": "Color Tool Remix",
+    "win": {
+      "icon": "static/icon.ico",
+      "publish": {
+        "provider": "github",
+        "owner": "benjaminadk"
+      },
+      "target": [
+        "nsis"
+      ]
+    },
+    "directories": {
+      "output": "release"
+    }
   }
 }

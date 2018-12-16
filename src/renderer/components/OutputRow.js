@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const OutputRow = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  justify-items: center;
+  justify-items: start;
   margin: 2rem auto;
 `
 

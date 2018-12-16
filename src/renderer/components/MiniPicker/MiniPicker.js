@@ -23,7 +23,7 @@ const ColorColumn = styled.div`
 const MiniColor = styled.div`
   position: relative;
   width: ${props => props.theme.miniPickerWidth};
-  height: ${props => props.theme.miniPickerWidth};
+  height: ${props => props.theme.miniPickerHeight};
   background: ${props => props.color};
   color: ${props => getContrastColor(props.color)};
   .inner {

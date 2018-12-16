@@ -406,7 +406,7 @@ export default class App extends React.Component {
 
   openPrompt = async () => {
     const options = {
-      height: 175,
+      height: 165,
       title: 'Color String Parser',
       label: 'Color String',
       value: null,

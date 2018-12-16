@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { remote } from 'electron'
+import { remote, ipcRenderer } from 'electron'
 import App from '../../App'
 import { GlobalStyle, Inner } from './GlobalStyle'
 import TitleBar from './TitleBar'
 import windowDimens from 'common/windowDimens'
 import miniDimens from 'common/miniDimens'
+import Picker from '../Picker/Picker'
 
 const id = remote.getCurrentWindow().id
 let mainWin = remote.BrowserWindow.fromId(1)
@@ -25,8 +26,13 @@ export default class Page extends React.Component {
   }
 
   componentDidMount() {
-    mainWin.on('restore', () => {
-      console.log('mainWin --> [restore]')
+    ipcRenderer.on('picker.restore', () => {
+      console.log('renderer recieved picker.restore')
+      this.setPickerSize(!this.state.fullSize)
+    })
+
+    ipcRenderer.on('picker.focus', () => {
+      console.log('renderer recieved picker.focus')
       this.setPickerSize(!this.state.fullSize)
     })
   }

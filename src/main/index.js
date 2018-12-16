@@ -1,14 +1,16 @@
 import { app, BrowserWindow, globalShortcut, Tray, Menu, shell } from 'electron'
+import { autoUpdater } from 'electron-updater'
 import windowDimens from 'common/windowDimens'
 import endpoint from 'common/endpoint'
 import path from 'path'
 
-let mainWin, tray
-
+const firstInstance = app.requestSingleInstanceLock()
 const inDev = process.env.NODE_ENV === 'development'
 const icon = path.join(__static, 'icon.ico')
+let mainWin, tray
 
 function createMainWindow() {
+  autoUpdater.checkForUpdatesAndNotify()
   const [width, height, x, y] = windowDimens()
 
   mainWin = new BrowserWindow({
@@ -72,8 +74,11 @@ function setupTray() {
 function onTrayClick() {
   if (mainWin.isMinimized()) {
     mainWin.restore()
+    mainWin.focus()
+    sendToRenderer('picker.restore')
   } else {
     mainWin.focus()
+    sendToRenderer('picker.focus')
   }
 }
 
@@ -86,9 +91,22 @@ function openDocumentation() {
   shell.openExternal('https://github.com/benjaminadk/electron-color')
 }
 
-app.on('ready', createMainWindow)
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
+if (!firstInstance) {
+  app.quit()
+} else {
+  app.on('second-instance', () => {
+    if (mainWin) {
+      if (mainWin.isMinimized()) {
+        mainWin.restore()
+        mainWin.focus()
+        sendToRenderer('picker.restore')
+      }
+    }
+  })
+  app.on('ready', createMainWindow)
+  app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+      app.quit()
+    }
+  })
+}

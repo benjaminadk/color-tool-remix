@@ -8,7 +8,7 @@ const Picker = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   align-self: center;
-  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  padding: 1rem;
 `
 
 export default class extends React.Component {
