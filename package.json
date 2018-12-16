@@ -1,6 +1,6 @@
 {
   "name": "electron-picker-remix",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A comprehensive desktop color ulitity",
   "repository": "https://github.com/benjaminadk/color-tool-remix",
   "main": "./dist/main/main.js",
@@ -44,6 +44,17 @@
       },
       "target": [
         "nsis"
+      ]
+    },
+    "mac": {
+      "category": "public.app-category.graphics-design",
+      "icon": "static/icon.icns",
+      "publish": {
+        "provider": "github",
+        "owner": "benjaminadk"
+      },
+      "target": [
+        "dmg"
       ]
     },
     "directories": {
