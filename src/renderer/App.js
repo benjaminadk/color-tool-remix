@@ -2,7 +2,7 @@ import React from 'react'
 import { remote, ipcRenderer } from 'electron'
 import rgbToHsl from 'rgb-to-hsl'
 import colorString from 'color-string'
-import prompt from 'electron-prompt'
+import prompt from 'common/popup'
 import fs from 'fs'
 import { promisify } from 'util'
 import Picker from './components/Picker/Picker'
@@ -24,7 +24,6 @@ const writeFileAsync = promisify(fs.writeFile)
 const colorsPath = getFilepath('colors.json')
 const optionsPath = getFilepath('options.json')
 const palettesPath = getFilepath('palettes.json')
-
 const [screenWidth, screenHeight, x, y] = screenDimens()
 let mainWin = remote.BrowserWindow.fromId(1)
 let dropWin
@@ -82,6 +81,7 @@ export default class App extends React.Component {
     }
   }
 
+  // clean up event listeners
   componentWillUnmount() {
     ipcRenderer.removeAllListeners('picker.large')
     ipcRenderer.removeAllListeners('picker.small')
@@ -91,7 +91,7 @@ export default class App extends React.Component {
     ipcRenderer.removeAllListeners('dropper.analyzer')
   }
 
-  // Initialize colors from saved json file or create blank palette
+  // initialize colors from saved json file or create blank palette
   initColors = async () => {
     try {
       const data = await readFileAsync(colorsPath)
@@ -102,6 +102,7 @@ export default class App extends React.Component {
     }
   }
 
+  // initialize options from saved json file or create with defaults
   initOptions = async () => {
     try {
       const data = await readFileAsync(optionsPath)
@@ -112,6 +113,7 @@ export default class App extends React.Component {
     }
   }
 
+  // initialize save palettes of create file
   initPalettes = async () => {
     try {
       const data = await readFileAsync(palettesPath)
@@ -133,7 +135,18 @@ export default class App extends React.Component {
   }
 
   deleteColor = async i => {
-    if (confirm('Delete this beautiful color tile ?')) {
+    const options = {
+      height: 200,
+      title: 'Confirm',
+      label: 'Delete Color Swatch',
+      message:
+        'This action will permanently delete this color from the active palette. Are you sure you want to do this?',
+      ok: 'Delete',
+      cancel: 'Cancel',
+      type: 'confirm'
+    }
+    const deleteSwatch = await prompt(options, mainWin)
+    if (deleteSwatch) {
       const { colors } = this.state
       const newColors = colors.filter((color, index) => index !== i)
       newColors.push({ color: 'transparent', clean: true })
@@ -142,10 +155,21 @@ export default class App extends React.Component {
     }
   }
 
-  resetColors = () => {
-    if (confirm('Clear all colors tiles from the working palette ?')) {
-      this.createColors()
+  // clear the active palette but ask first
+  resetColors = async () => {
+    if (this.state.colors[0].clean) return
+    const options = {
+      height: 200,
+      title: 'Confirm',
+      label: 'Reset Color Palette',
+      message:
+        'This action will permanently delete all colors in the active palette. Make sure you save your palette first if you want to keep them.',
+      ok: 'Reset',
+      cancel: 'Cancel',
+      type: 'confirm'
     }
+    const cs = await prompt(options, mainWin)
+    if (cs) this.createColors()
   }
 
   // create options file
@@ -164,11 +188,24 @@ export default class App extends React.Component {
     await writeFileAsync(palettesPath, JSON.stringify([]))
   }
 
+  // save the active palette to disk with a name
   savePalette = async () => {
     let palette, index
     let { paletteName, colors, palettes } = this.state
-    if (!paletteName) return alert('Name your palette first!')
+    // configure error alert if no palette name entered
+    const options = {
+      height: 150,
+      title: 'Error',
+      label: 'No Palette Name',
+      message: 'Your palette must have a name before saving.',
+      ok: 'Ahhhhh',
+      type: 'alert'
+    }
+    if (!paletteName) return prompt(options, mainWin)
+
+    // create new palette object
     const newPalette = { name: paletteName, colors }
+    // check if name already exists and overwrite if true
     palette = palettes.find((el, i) => {
       index = i
       return el.name === paletteName
@@ -181,18 +218,39 @@ export default class App extends React.Component {
       palettes.push(palette)
     }
     this.setState({ palettes })
+    // save palette to disk
     await writeFileAsync(palettesPath, JSON.stringify(palettes))
-    alert('Palette saved!')
+    // send success message after saving
+    const options2 = Object.assign(options, {
+      height: 150,
+      title: 'Success',
+      label: 'Saved Palette',
+      message: 'Your palette has been saved.',
+      ok: 'Cool'
+    })
+    await prompt(options2, mainWin)
   }
 
+  // load a saved palette into the active palette
   loadPalette = palette => {
     const { name, colors } = palette
     this.setState({ paletteName: name, colors })
     this.setMode(0)
   }
 
+  // delete a palette from disk
   deletePalette = async (i, name) => {
-    if (confirm(`Delete Palette: ${name}`)) {
+    const options = {
+      height: 175,
+      title: 'Confirm',
+      label: 'Delete Palette',
+      message: `This will permanently delete ${name}. Are you sure?`,
+      ok: 'Delete',
+      cancel: 'Cancel',
+      type: 'confirm'
+    }
+    const deletePalette = await prompt(options, mainWin)
+    if (deletePalette) {
       const { palettes } = this.state
       const newPalettes = palettes.filter((palette, index) => index !== i)
       this.setState({ palettes: newPalettes })
@@ -255,8 +313,17 @@ export default class App extends React.Component {
     let a, str, newColor
     const colors = this.state.colors
     // check to see if palette is full
-    if (!colors[63].clean) return
-    // TODO prompt user for palette name, save it and start a new palette
+    if (!colors[63].clean) {
+      const options = {
+        height: 175,
+        title: 'Error',
+        label: 'Full Palette',
+        message: 'Unbelievable, you filled an entire palette. Time to make a new one!',
+        ok: 'I See',
+        type: 'alert'
+      }
+      return prompt(options, mainWin)
+    }
     // dropper returns rgb string so we have to parse it to hsl
     if (type === 'rgb') {
       let rgb = color.replace(/[^\d,]/g, '').split(',')
@@ -335,6 +402,7 @@ export default class App extends React.Component {
     menu.popup({ window: remote.getCurrentWindow() })
   }
 
+  // helper function apply math to base color
   generateColors = async (c, i, x1, x2, x3) => {
     const { colors } = this.state
     var h1, cs1, color
@@ -350,32 +418,32 @@ export default class App extends React.Component {
     this.onSwatchClick(c)
     await writeFileAsync(colorsPath, JSON.stringify(colors))
   }
-
+  // generates one complementary color
   makeCompColor = (c, i) => {
     if (!this.state.colors[63].clean) return
     this.generateColors(c, i, 180, 180, 180)
   }
-
+  // generates two split complementary colors
   makeSplitCompColor = (c, i) => {
     if (!this.state.colors[62].clean) return
     this.generateColors(c, i, 150, 210, 60)
   }
-
+  // generates two colors to complete triad
   makeTriadicColor = (c, i) => {
     if (!this.state.colors[62].clean) return
     this.generateColors(c, i, 120, 240, 120)
   }
-
+  // generates three colors to complete tetrad
   makeTetradic = (c, i) => {
     if (!this.state.colors[61].clean) return
     this.generateColors(c, i, 90, 270, 90)
   }
-
+  // generates four colors
   makeAnalogous = (c, i) => {
     if (!this.state.colors[60].clean) return
     this.generateColors(c, i, 30, 90, 30)
   }
-
+  // generates 8 colors for the same hue
   makeMonochromeColor = async (c, i) => {
     const { colors } = this.state
     if (!colors[57].clean) return
@@ -393,6 +461,7 @@ export default class App extends React.Component {
     await writeFileAsync(colorsPath, JSON.stringify(colors))
   }
 
+  // limit palette names to 25 characters
   handleChange = e => {
     const { name, value } = e.target
     if (name === 'paletteName') {
@@ -404,35 +473,52 @@ export default class App extends React.Component {
     }
   }
 
+  // parse user input into a color swatch or return error
   openPrompt = async () => {
-    const options = {
+    // prompt user for string input
+    let options = {
       height: 165,
       title: 'Color String Parser',
       label: 'Color String',
-      value: null,
+      ok: 'Parse Color',
+      cancel: 'Cancel',
       type: 'input',
       inputAttrs: { type: 'text', placeholder: 'Enter HSL, RGB or HEX value' }
     }
-    const parentWindow = remote.getCurrentWindow()
-    const cs = await prompt(options, parentWindow)
-
-    if (!cs) console.log('cancelled')
+    const cs = await prompt(options, mainWin)
+    // exit if cancelled
+    if (!cs) return
+    // otherwise attempt to parse
     else {
       let str, newColor
       const colors = this.state.colors
       // parse and construct color
       const parsed = colorString.get(cs)
-      if (parsed.model === 'hsl') {
+      // totally unparsable
+      if (!parsed) {
+        const options2 = Object.assign(options, {
+          title: 'Error',
+          label: 'Invalid Input',
+          message: `${cs} is not a parsable string.`,
+          ok: 'Try #FF00FF',
+          type: 'alert'
+        })
+        return prompt(options2, mainWin)
+        // hsl model is easy
+      } else if (parsed.model === 'hsl') {
         str = getHSLString(false, parsed.value[0], parsed.value[1], parsed.value[2])
+        // rgb requires some work
       } else if (parsed.model === 'rgb') {
         let hsl = rgbToHsl(parsed.value[0], parsed.value[1], parsed.value[2])
         let h = Math.round(hsl[0])
         let s = Math.round(parseInt(hsl[1]), 10)
         let l = Math.round(parseInt(hsl[2]), 10)
         str = getHSLString(false, h, s, l)
+        // catches typos like rgb(123,123,whoops)
       } else {
-        return alert('Error: Not a parsable color string.')
+        return prompt(options2, mainWin)
       }
+      // make new colors
       newColor = { color: str, clean: false }
       // save color to first open palette location
       const firstAvailable = colors.findIndex(c => c.clean)
@@ -444,6 +530,7 @@ export default class App extends React.Component {
     }
   }
 
+  // limits random color saturation and lightness range to remove very light/dark colors
   createRandomColor = () => {
     const h = Math.floor(Math.random() * 360)
     let s = Math.floor(Math.random() * 100)
@@ -455,6 +542,7 @@ export default class App extends React.Component {
     this.createSwatch(color, 'hsl')
   }
 
+  // toggles mode between picker, options, palettes
   setMode = mode => this.setState({ mode })
 
   render() {
