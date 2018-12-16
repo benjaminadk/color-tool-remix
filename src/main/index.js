@@ -88,7 +88,7 @@ function sendToRenderer(msg) {
 }
 
 function openDocumentation() {
-  shell.openExternal('https://github.com/benjaminadk/electron-color')
+  shell.openExternal('https://github.com/benjaminadk/color-picker-remix')
 }
 
 if (!firstInstance) {

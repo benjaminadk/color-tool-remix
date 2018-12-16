@@ -52,7 +52,7 @@ const TitleBarStyles = styled.div`
 
 export default class TitleBar extends React.Component {
   renderTitle = () => {
-    const name = remote.app.getName()
+    const name = 'Color Tool'
     const version = remote.app.getVersion()
     return `${name}  @  ${version} ${this.props.showPin ? '📌' : ''} `
   }
