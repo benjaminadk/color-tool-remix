@@ -2,7 +2,7 @@ import React from 'react'
 import { remote, ipcRenderer } from 'electron'
 import rgbToHsl from 'rgb-to-hsl'
 import colorString from 'color-string'
-import prompt from 'common/popup'
+import prompt from 'common/electronPopup'
 import fs from 'fs'
 import { promisify } from 'util'
 import Picker from './components/Picker/Picker'
@@ -192,6 +192,8 @@ export default class App extends React.Component {
   savePalette = async () => {
     let palette, index
     let { paletteName, colors, palettes } = this.state
+    // no colors!!
+    if (colors[0].clean) return
     // configure error alert if no palette name entered
     const options = {
       height: 150,
@@ -465,7 +467,10 @@ export default class App extends React.Component {
   handleChange = e => {
     const { name, value } = e.target
     if (name === 'paletteName') {
-      if (value.length >= 25) return this.setState({ [name]: value.slice(0, 25) })
+      if (value.length >= 25)
+        return this.setState({
+          [name]: value.slice(0, 25)
+        })
       this.setState({ [name]: value })
     }
     if (name === 'inputString') {
@@ -474,7 +479,7 @@ export default class App extends React.Component {
   }
 
   // parse user input into a color swatch or return error
-  openPrompt = async () => {
+  openColorParsePrompt = async () => {
     // prompt user for string input
     let options = {
       height: 165,
@@ -567,7 +572,7 @@ export default class App extends React.Component {
               onContextMenu={this.onContextMenu}
               setMode={this.setMode}
               handleChange={this.handleChange}
-              openPrompt={this.openPrompt}
+              openColorParsePrompt={this.openColorParsePrompt}
               createRandomColor={this.createRandomColor}
             />
           )

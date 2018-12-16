@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Add, Colorize, ZoomOut, Settings, Code, Redeem } from 'styled-icons/material'
-import { Button, iconStyles } from './Picker/Right'
+import { Button, iconStyles } from './Right'
 
 const ActionRow = styled.div`
   display: grid;
@@ -24,7 +24,7 @@ export default props => (
     <Button onClick={props.initDropper} title="Open Dropper">
       <ColorizeIcon />
     </Button>
-    <Button onClick={props.openPrompt} title="Parse Color String">
+    <Button onClick={props.openColorParsePrompt} title="Parse Color String">
       <CodeIcon />
     </Button>
     <Button onClick={props.createRandomColor} title="Random Color">

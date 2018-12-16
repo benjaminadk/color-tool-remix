@@ -1,13 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import ColorBar from '../ColorBar'
-import Inputs from '../Inputs'
-import Input from '../Input'
-import Swatch from '../Swatch'
-import OutputRow from '../OutputRow'
-import ColorStrings from '../ColorStrings'
-import Output from '../Output'
-import ActionRow from '../ActionRow'
+import ColorBar from './ColorBar'
+import Input from './Input'
+import Swatch from './Swatch'
+import Output from './Output'
+import ActionRow from './ActionRow'
 import constants from '../../lib/constants'
 import getHSLString from '../../lib/getHSLString'
 import getRGBString from '../../lib/getRGBString'
@@ -15,7 +12,29 @@ import copyToClipboard from '../../lib/copyToClipboard'
 
 const { barHeight, barWidth, hueSlice, regSlice } = constants
 
-const ColorBarsStyles = styled.div``
+const ColorBarsStyles = styled.div`
+  .inputs {
+    width: ${props => props.theme.barWidth};
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+  }
+
+  .output-rows {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: start;
+    margin: 2rem auto;
+  }
+
+  .color-strings {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 0.25rem;
+    border: ${props => props.theme.border};
+    background: white;
+  }
+`
 
 export default class ColorBars extends React.Component {
   constructor(props) {
@@ -282,8 +301,7 @@ export default class ColorBars extends React.Component {
           left={this.state.opaLeft}
           show={this.props.options.alphaMode}
         />
-
-        <Inputs>
+        <div className="inputs">
           <Input
             type="hue"
             value={hue}
@@ -316,10 +334,10 @@ export default class ColorBars extends React.Component {
             onChange={this.onInputChange}
             onClick={this.onInputClick}
           />
-        </Inputs>
-        <OutputRow>
+        </div>
+        <div className="output-rows">
           <Swatch alpha={this.props.options.alphaMode} hsl={hsl} hsla={hsla} />
-          <ColorStrings>
+          <div className="color-strings">
             <Output
               value={HSL}
               index={1}
@@ -338,14 +356,14 @@ export default class ColorBars extends React.Component {
               copied={this.state.copied}
               onClick={() => this.copyColorString(HEX, 3)}
             />
-          </ColorStrings>
-        </OutputRow>
+          </div>
+        </div>
         <ActionRow
           handleCreateSwatch={this.handleCreateSwatch}
           setPickerSize={this.props.setPickerSize}
           initDropper={this.props.initDropper}
           setMode={this.props.setMode}
-          openPrompt={this.props.openPrompt}
+          openColorParsePrompt={this.props.openColorParsePrompt}
           createRandomColor={this.props.createRandomColor}
         />
       </ColorBarsStyles>

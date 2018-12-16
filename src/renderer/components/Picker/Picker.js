@@ -25,7 +25,7 @@ export default class extends React.Component {
           setPickerSize={this.props.setPickerSize}
           initDropper={this.props.initDropper}
           setMode={this.props.setMode}
-          openPrompt={this.props.openPrompt}
+          openColorParsePrompt={this.props.openColorParsePrompt}
           createRandomColor={this.props.createRandomColor}
         />
         <Right

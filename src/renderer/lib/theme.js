@@ -1,6 +1,7 @@
 import { remote } from 'electron'
-import getContrastColor from './lib/getContrastColor'
+import getContrastColor from './getContrastColor'
 
+// detect accent color on windows platform or set to #333333 on macOS/linux
 let accentColor, accentText
 if (process.platform === 'win32') {
   accentColor = '#' + remote.systemPreferences.getAccentColor().substr(0, 6)
@@ -10,6 +11,7 @@ if (process.platform === 'win32') {
   accentText = getContrastColor(accentColor)
 }
 
+// theme for styled components theme provider
 export default {
   barWidth: '360px',
   barHeight: '16px',

@@ -12,6 +12,7 @@
 ### Changed
 
 - Began work on README documentation
+- Refactor file structure to eliminate extra files
 
 ## 1.0.0 2018-12-15
 
