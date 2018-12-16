@@ -2,7 +2,9 @@
 
 An HSL color picker, dropper, color analyzer and palette generator. The do it all color tool.
 
-[![GitHub release](https://img.shields.io/github/release/benjaminadk/color-tool-remix.svg?style=flat-square)](https://github.com/benjaminadk/color-tool-remix/releases) ![Platform](https://img.shields.io/badge/platform-windows-lightgrey.svg?style=flat-square) [![Github All Releases](https://img.shields.io/github/downloads/benjaminadk/color-tool-remix/total.svg?style=flat-square)](https://github.com/benjaminadk/color-tool-remix/releases) ![AppVeyor](https://img.shields.io/appveyor/ci/benjaminadk/color-tool-remix.svg?style=flat-square)
+[![GitHub release](https://img.shields.io/github/release/benjaminadk/color-tool-remix.svg?style=flat-square)](https://github.com/benjaminadk/color-tool-remix/releases) [![Github All Releases](https://img.shields.io/github/downloads/benjaminadk/color-tool-remix/total.svg?style=flat-square)](https://github.com/benjaminadk/color-tool-remix/releases)
+
+![Platform](https://img.shields.io/badge/platform-windows-lightgrey.svg?style=flat-square) ![AppVeyor](https://img.shields.io/appveyor/ci/benjaminadk/color-tool-remix.svg?style=flat-square) ![Platform](https://img.shields.io/badge/platform-osx-lightgrey.svg?style=flat-square) ![Travis](https://img.shields.io/travis/benjaminadk/color-tool-remix.svg?style=flat-square)
 
 <img src="https://s3-us-west-1.amazonaws.com/color-tool-remix/color-tool-1.gif" width='500' />
 
