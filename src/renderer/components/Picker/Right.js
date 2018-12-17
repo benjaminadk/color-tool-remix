@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { shell } from 'electron'
-import Palette from '../Palettes/Palette'
+import Palette from './Palette'
 import { Refresh, Save, Palette as Art, Help } from 'styled-icons/material'
 
 const Right = styled.div`

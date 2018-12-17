@@ -8,6 +8,8 @@
 
 - Add `macOS` build
 - Add confirm/alert/prompt electron component based on `electron-prompt`
+- Add name property to Color object
+- Palettes UI with copy to clipbard for `scss` or `css variables`
 
 ### Changed
 

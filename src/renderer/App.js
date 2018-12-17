@@ -128,12 +128,13 @@ export default class App extends React.Component {
   createColors = async () => {
     let colors = []
     for (let i = 0; i < 64; i++) {
-      colors[i] = { color: 'transparent', clean: true }
+      colors[i] = { color: 'transparent', name: '', clean: true }
     }
     this.setState({ colors })
     await writeFileAsync(colorsPath, JSON.stringify(colors))
   }
 
+  // delete a single color swatch
   deleteColor = async i => {
     const options = {
       height: 200,
@@ -149,7 +150,7 @@ export default class App extends React.Component {
     if (deleteSwatch) {
       const { colors } = this.state
       const newColors = colors.filter((color, index) => index !== i)
-      newColors.push({ color: 'transparent', clean: true })
+      newColors.push({ color: 'transparent', name: '', clean: true })
       this.setState({ colors: newColors })
       await writeFileAsync(colorsPath, JSON.stringify(newColors))
     }
@@ -175,7 +176,7 @@ export default class App extends React.Component {
   // create options file
   createOptions = async () => {
     this.setState({ options: constants.options })
-    await writeFileAsync(optionsPath, JSON.stringify(defaultOptions))
+    await writeFileAsync(optionsPath, JSON.stringify(constants.options))
   }
 
   saveOptions = async options => {
@@ -261,7 +262,7 @@ export default class App extends React.Component {
     }
     return false
   }
-
+  // initializes the dropper
   initDropper = () => {
     // IPC message from dropper with new color to save
     ipcRenderer.once('dropper.color', (e, color) => {
@@ -340,10 +341,10 @@ export default class App extends React.Component {
         a = 100
         str = getHSLString(false, h, s, l)
       }
-      newColor = { color: str, clean: false }
+      newColor = { color: str, name: '', clean: false }
     } else {
       // color from bar type color pick is saved as it in hsl
-      newColor = { color, clean: false }
+      newColor = { color, name: '', clean: false }
     }
     // save color to first open palette location
     const firstAvailable = colors.findIndex(c => c.clean)
@@ -367,6 +368,11 @@ export default class App extends React.Component {
     const template = [
       { label: 'Color Generators', enabled: false },
       { type: 'separator' },
+      {
+        label: 'Color Name',
+        click: () => this.openNameColorPrompt(c, i),
+        icon: getStaticFile('name-16x16.png')
+      },
       {
         label: 'Complementary',
         click: () => this.makeCompColor(c, i),
@@ -412,7 +418,7 @@ export default class App extends React.Component {
     for (let y = x1; y <= x2; y += x3) {
       h1 = (h + y) % 360
       cs1 = getHSLString(bool, h1, s, l, a)
-      color = { color: cs1, clean: false }
+      color = { color: cs1, name: '', clean: false }
       colors.splice(i + 1, 0, color)
       colors.pop()
     }
@@ -453,7 +459,7 @@ export default class App extends React.Component {
     var [bool, h, s, l, a] = getHSLParts(c.color)
     for (let x = 15; x <= 85; x += 10) {
       cs = getHSLString(bool, h, s, x, a)
-      color = { color: cs, clean: false }
+      color = { color: cs, name: '', clean: false }
       x === 85 && colors.splice(i, 1, color)
       x !== 85 && colors.splice(i + 1, 0, color)
       x !== 85 && colors.pop()
@@ -483,7 +489,7 @@ export default class App extends React.Component {
     // prompt user for string input
     let options = {
       height: 165,
-      title: 'Color String Parser',
+      title: 'Color Parser',
       label: 'Color String',
       ok: 'Parse Color',
       cancel: 'Cancel',
@@ -524,7 +530,7 @@ export default class App extends React.Component {
         return prompt(options2, mainWin)
       }
       // make new colors
-      newColor = { color: str, clean: false }
+      newColor = { color: str, name: '', clean: false }
       // save color to first open palette location
       const firstAvailable = colors.findIndex(c => c.clean)
       colors[firstAvailable] = newColor
@@ -532,6 +538,29 @@ export default class App extends React.Component {
       this.onSwatchClick(newColor)
       this.setState({ colors })
       await writeFileAsync(colorsPath, JSON.stringify(colors))
+    }
+  }
+
+  // add a name property to the color
+  openNameColorPrompt = async (c, i) => {
+    // prompt user for string input
+    let options = {
+      height: 165,
+      title: 'Color Name',
+      label: 'Color Name',
+      ok: 'Save',
+      cancel: 'Cancel',
+      type: 'input',
+      value: c.name,
+      inputAttrs: { type: 'text', placeholder: 'Enter exact text ex: $primary, --dark-pink' }
+    }
+    const name = await prompt(options, mainWin)
+    // exit if cancelled
+    if (!name) return
+    else {
+      let { colors } = this.state
+      colors[i].name = name
+      this.setState({ colors })
     }
   }
 
