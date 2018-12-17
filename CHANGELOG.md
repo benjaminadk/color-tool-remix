@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## 1.0.1 2018-12-17
+
 ### Added
 
 - Add `macOS` build
