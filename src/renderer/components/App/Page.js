@@ -6,10 +6,8 @@ import { GlobalStyle, Inner } from './GlobalStyle'
 import TitleBar from './TitleBar'
 import windowDimens from 'common/windowDimens'
 import miniDimens from 'common/miniDimens'
-import Picker from '../Picker/Picker'
 
 const id = remote.getCurrentWindow().id
-let mainWin = remote.BrowserWindow.fromId(1)
 
 const StyledPage = styled.div`
   height: 100vh;
@@ -38,19 +36,20 @@ export default class Page extends React.Component {
   }
 
   setPickerSize = mini => {
+    this.setState({ fullSize: !mini })
     const win = remote.getCurrentWindow()
     if (mini) {
       const [w, h, x, y] = miniDimens()
+      win.show()
       win.setSize(w, h)
       win.setPosition(x, y)
       win.setSkipTaskbar(true)
-      this.setState({ fullSize: false })
     } else {
       const [w, h, x, y] = windowDimens()
+      win.show()
       win.setSize(w, h)
       win.setPosition(x, y)
       win.setSkipTaskbar(false)
-      this.setState({ fullSize: true })
     }
   }
 

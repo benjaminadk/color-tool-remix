@@ -61,7 +61,7 @@ function setupTray() {
 
   let contextMenu = Menu.buildFromTemplate([
     { label: 'Color Tool', click: () => sendToRenderer('picker.large') },
-    { label: 'Mini Tool', click: () => sendToRenderer('picker.small') },
+    { label: 'Project Mode', click: () => sendToRenderer('picker.small') },
     { label: 'Dropper', click: () => sendToRenderer('dropper.open') },
     { label: 'Documentation', click: () => openDocumentation() },
     { role: 'Quit' }

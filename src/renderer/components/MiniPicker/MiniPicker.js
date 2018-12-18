@@ -1,6 +1,7 @@
 import React from 'react'
+import { shell } from 'electron'
 import styled from 'styled-components'
-import { Colorize, OpenWith } from 'styled-icons/material'
+import { Colorize, OpenWith, HelpOutline } from 'styled-icons/material'
 import copyToClipboard from '../../lib/copyToClipboard'
 import getContrastColor from '../../lib/getContrastColor'
 import getHSLParts from '../../lib/getHSLParts'
@@ -15,7 +16,7 @@ const MiniPickerStyles = styled.div`
 const ColorColumn = styled.div`
   width: ${props => props.theme.miniPickerWidth};
   display: grid;
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-rows: repeat(9, 1fr) 25px;
   justify-items: center;
   align-items: center;
 `
@@ -106,6 +107,19 @@ const QuadButton = styled.div`
   }
 `
 
+const HalfButton = styled.button`
+  width: ${props => props.theme.miniPickerWidth};
+  height: 25px;
+  background: white;
+  color: ${props => props.theme.black};
+  border: none;
+  transition: all 0.25s;
+  &:hover {
+    background: ${props => props.theme.black};
+    color: white;
+  }
+`
+
 export default class MiniPicker extends React.Component {
   state = {
     copiedIndex: null,
@@ -189,6 +203,11 @@ export default class MiniPicker extends React.Component {
           <Button onClick={() => this.props.setPickerSize(false)}>
             <OpenWith size={20} color="inherit" />
           </Button>
+          <HalfButton
+            onClick={() => shell.openExternal('https://github.com/benjaminadk/color-tool-remix')}
+          >
+            <HelpOutline size={20} color="inherit" />
+          </HalfButton>
         </ColorColumn>
       </MiniPickerStyles>
     )

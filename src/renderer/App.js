@@ -62,8 +62,8 @@ export default class App extends React.Component {
 
     ipcRenderer.on('picker.small', () => {
       console.log('renderer received --> [picker.small]')
-      this.setMode(0)
       this.props.setPickerSize(true)
+      this.setMode(0)
       mainWin.focus()
     })
 

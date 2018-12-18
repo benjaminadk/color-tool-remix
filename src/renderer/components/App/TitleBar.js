@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { remote } from 'electron'
 import { DragHandle, Close, Remove } from 'styled-icons/material'
-import getStaticFile from 'common/getStaticFile'
 
 const TitleBarStyles = styled.div`
   -webkit-app-region: drag;
@@ -75,7 +74,6 @@ export default class TitleBar extends React.Component {
       <TitleBarStyles height={35}>
         <div className="left">
           <img src="https://s3-us-west-1.amazonaws.com/benjaminadk/picker-icon-4.png" width="15" />
-          {/* <DragHandle size={20} color="#FFFFFF" /> */}
           <div>{this.renderTitle()}</div>
         </div>
         <div className="right">

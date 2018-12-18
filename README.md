@@ -13,10 +13,16 @@ An HSL color picker, dropper, color analyzer and palette generator. The do it al
 - [Installation](#installation)
 - [Usage](#usage)
   - [Picker](#picker)
-  - [Palettes](#palettes)
   - [Dropper](#dropper)
+  - [Palettes](#palettes)
+  - [Generator](#generator)
+  - [Project Mode](#project-mode)
   - [User Interface](#user-interface)
+  - [Options](#options)
 - [Tech Stack](#tech-stack)
+- [Changelog](#changelog)
+- [Contributors](#contributors)
+- [Donate](#donate)
 
 ### Installation
 
@@ -36,19 +42,47 @@ _System warnings are normal due to lack of Code Signing_
 
 <img src="https://s3-us-west-1.amazonaws.com/color-tool-remix/color-tool-1.gif" width='500' />
 
-- Slide color bars and click the Add Color button
-- Fine tune levels with Value Inputs
-- Parse a string from HSL, RGB or HEX source
-- Generate a random color for fun
-- Copy color string in HSL, RGB or HEX format, with or without alpha channel
-
-#### Palettes
+_Create a color quickly, via a variety of input methods_
 
 #### Dropper
 
 <img src="https://s3-us-west-1.amazonaws.com/color-tool-remix/color-tool-3.gif" width='500' />
 
-- Add a color from a single pixel anywhere on your computer screen
+_Select a single pixel from anywhere on your screen_
+
+#### Palettes
+
+<img src="https://s3-us-west-1.amazonaws.com/color-tool-remix/color-tool-4.gif" width="500" />
+
+_Create, name, save and manage palettes for different projects_
+
+#### Generator
+
+Generate colors based on color theory
+
+- _*Complementary*_
+
+- _*Split Complementary*_
+
+- _*Triad*_
+
+- _*Tetrad*_
+
+- _*Analagous*_
+
+- _*Monochromatic*_
+
+#### Project Mode
+
+<img src="https://s3-us-west-1.amazonaws.com/color-tool-remix/color-tool-6.gif" width="500" />
+
+_A minimal interface, ideal size for working on projects_
+
+#### Analyzer
+
+<img src="https://s3-us-west-1.amazonaws.com/color-tool-remix/color-tool-5.gif" width="500" />
+
+_Capture the entire color theme of a website, application or photo_
 
 #### User Interface
 
@@ -75,7 +109,17 @@ _System warnings are normal due to lack of Code Signing_
 
 ---
 
-#### Tech Stack
+#### Options
+
+|         Option         |           Description            |  Type   | Default |
+| :--------------------: | :------------------------------: | :-----: | :-----: |
+|       Alpha Mode       | Toggle alpha component in color  | Boolean | `false` |
+|     Always On Top      |     Pin app to top of window     | Boolean | `false` |
+|     Palette Format     | Color string format in Palettes  | String  | `'hsl'` |
+|   Dropper Hightlight   |    Highlight color in Dropper    | String  |  `red`  |
+| Dropper Analyzer Count | # of colors returned by Analyzer | Number  |   `8`   |
+
+### Tech Stack
 
 |       Package       |                       Description                       |                    Link                    |
 | :-----------------: | :-----------------------------------------------------: | :----------------------------------------: |
@@ -85,3 +129,19 @@ _System warnings are normal due to lack of Code Signing_
 |       `react`       |     JavaScript library for building user interfaces     |        [Docs](https://reactjs.org/)        |
 |     `react-dom`     |         React package for working with the DOM          | [Repo](https://github.com/facebook/react)  |
 | `styled-components` |         Visual primitives for the component age         | [Docs](https://www.styled-components.com/) |
+
+### Changelog
+
+Keep up with new features and changes in the [**Changelog**](https://github.com/benjaminadk/color-tool-remix/blob/master/CHANGELOG.md)
+
+### Contributors
+
+|                                [**benjaminadk**](https://github.com/benjaminadk)                                |
+| :-------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://avatars2.githubusercontent.com/u/28043421?s=80" width="80">](https://github.com/benjaminadk) |
+
+### Donate
+
+_For those who would like to show their appreciation the hours of work going into this free app_
+
+[![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=H5FBFKUNGF9S2)
