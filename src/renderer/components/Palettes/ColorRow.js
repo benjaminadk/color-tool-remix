@@ -14,7 +14,7 @@ const Item = styled.div`
     font-size: 1.3rem;
     text-align: center;
     background: ${props => props.color};
-    color: ${props => getContrastText(props.color)};
+    color: ${props => getContrastText(props.hsl)};
     padding: 0rem 0.75rem;
   }
   .right {
@@ -26,11 +26,13 @@ const Item = styled.div`
   }
 `
 
-export default ({ color: { color, name } }) => (
-  <Item color={color}>
-    <div className="left">{color}</div>
-    <div className="right">
-      <input type="text" value={name} readOnly />
-    </div>
-  </Item>
-)
+export default ({ color, name, hsl }) => {
+  return (
+    <Item color={color} hsl={hsl}>
+      <div className="left">{color}</div>
+      <div className="right">
+        <input type="text" value={name} readOnly />
+      </div>
+    </Item>
+  )
+}

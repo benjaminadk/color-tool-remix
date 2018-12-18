@@ -8,6 +8,8 @@ import Cube from './Cube'
 import IconRow from './IconRow'
 import ColorRow from './ColorRow'
 import copyToClipboard from '../../lib/copyToClipboard'
+import getHSLParts from '../../lib/getHSLParts'
+import getRGBString from '../../lib/getRGBString'
 
 export const Container = styled.div`
   height: calc(100vh - 50px);
@@ -79,12 +81,15 @@ export default class Palettes extends React.Component {
 
   copyAsVariables = () => {
     const { index } = this.state
-    const { palettes } = this.props
+    const {
+      palettes,
+      options: { paletteFormat }
+    } = this.props
     let colors = palettes[index].colors
     let str = ``
     colors.forEach(c => {
       if (c.name) {
-        str += `${c.name}: ${c.color};\n`
+        str += `${c.name}: ${this.getFormatted(c.color, paletteFormat)};\n`
       }
     })
     copyToClipboard(str)
@@ -100,9 +105,24 @@ export default class Palettes extends React.Component {
     prompt(options, remote.getCurrentWindow())
   }
 
+  getFormatted = (color, format) => {
+    let cs
+    if (format === 'hsl') {
+      cs = color
+    } else {
+      let [_, h, s, l] = getHSLParts(color)
+      cs = getRGBString(format === 'rgb', h, s, l)
+    }
+    return cs
+  }
+
   render() {
     const { index } = this.state
-    const { setMode, palettes } = this.props
+    const {
+      setMode,
+      palettes,
+      options: { paletteFormat }
+    } = this.props
     if (!palettes.length) {
       return <NoPalettes setMode={setMode} />
     } else {
@@ -124,7 +144,14 @@ export default class Palettes extends React.Component {
             <div className="grid">
               {colors.map((c, i) => {
                 if (c.clean) return null
-                return <ColorRow key={i} color={c} />
+                return (
+                  <ColorRow
+                    key={i}
+                    hsl={c.color}
+                    color={this.getFormatted(c.color, paletteFormat)}
+                    name={c.name}
+                  />
+                )
               })}
             </div>
           </Display>

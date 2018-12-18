@@ -2,7 +2,8 @@ const defaultOptions = {
   alphaMode: false,
   alwaysOnTop: false,
   dropperHighlightColor: 'red',
-  dropperAnalyzerCount: 8
+  dropperAnalyzerCount: 8,
+  paletteFormat: 'hsl'
 }
 
 export default {

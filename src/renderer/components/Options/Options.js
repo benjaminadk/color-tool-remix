@@ -13,7 +13,7 @@ const Container = styled.div`
 
   .options {
     display: grid;
-    grid-template-rows: repeat(4, auto);
+    grid-template-rows: repeat(5, auto);
     margin-bottom: 2rem;
     & > * {
       margin-bottom: 0.5rem;
@@ -22,9 +22,10 @@ const Container = styled.div`
 
   .alpha,
   .onTop,
+  .palette-format,
   .count {
     width: 300px;
-    height: 30px;
+    height: 35px;
     display: grid;
     grid-template-columns: auto auto;
     align-items: center;
@@ -54,14 +55,15 @@ const Container = styled.div`
     label {
       font-size: ${props => props.theme.smallerFontSize};
     }
-    select,
-    option {
-      width: 100px;
-      text-align: center;
-      padding: 0.5rem;
-      font-family: 'Oswald';
-      outline: none;
-    }
+  }
+
+  select,
+  option {
+    width: 100px;
+    text-align: center;
+    padding: 0.5rem;
+    font-family: 'Oswald';
+    outline: none;
   }
 
   button {
@@ -77,6 +79,10 @@ const Container = styled.div`
       color: white;
     }
   }
+
+  .palette-format > select {
+    justify-self: end;
+  }
 `
 
 const Square = styled.span`
@@ -88,23 +94,19 @@ const Square = styled.span`
 `
 
 const colors = ['orangered', 'lime', 'dodgerblue', 'red']
+const formats = ['hsl', 'rgb', 'hex']
 
 export default class Options extends React.Component {
   state = {
     alphaMode: false,
     alwaysOnTop: false,
+    paletteFormat: 'hsl',
     dropperHighlightColor: 'red',
     dropperAnalyzerCount: 8
   }
 
   componentDidMount() {
-    const {
-      alphaMode,
-      alwaysOnTop,
-      dropperHighlightColor,
-      dropperAnalyzerCount
-    } = this.props.options
-    this.setState({ alphaMode, alwaysOnTop, dropperHighlightColor, dropperAnalyzerCount })
+    this.setState({ ...this.props.options })
   }
 
   handleChange = e => {
@@ -119,6 +121,7 @@ export default class Options extends React.Component {
     const options = {
       alphaMode: this.state.alphaMode,
       alwaysOnTop: this.state.alwaysOnTop,
+      paletteFormat: this.state.paletteFormat,
       dropperHighlightColor: this.state.dropperHighlightColor,
       dropperAnalyzerCount: this.state.dropperAnalyzerCount
     }
@@ -151,6 +154,21 @@ export default class Options extends React.Component {
             />
           </div>
 
+          <div className="palette-format">
+            <label htmlFor="paletteFormat">Palette Color Format</label>
+            <select
+              name="paletteFormat"
+              value={this.state.paletteFormat}
+              onChange={this.handleChange}
+            >
+              {formats.map(format => (
+                <option key={format} value={format}>
+                  {format}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div className="highlight">
             <label htmlFor="dropperHighlightColor">Dropper Highlight</label>
             <Square color={this.state.dropperHighlightColor} />
@@ -166,6 +184,7 @@ export default class Options extends React.Component {
               ))}
             </select>
           </div>
+
           <div className="count">
             <label className="label" htmlFor="dropperAnalyzerCount">
               Analyzer Count

@@ -617,6 +617,7 @@ export default class App extends React.Component {
         } else if (this.state.mode === 2) {
           return (
             <Palettes
+              options={this.state.options}
               palettes={this.state.palettes}
               loadPalette={this.loadPalette}
               deletePalette={this.deletePalette}

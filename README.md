@@ -12,10 +12,10 @@ An HSL color picker, dropper, color analyzer and palette generator. The do it al
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - [User Interface](#user-interface)
   - [Picker](#picker)
   - [Palettes](#palettes)
   - [Dropper](#dropper)
+  - [User Interface](#user-interface)
 - [Tech Stack](#tech-stack)
 
 ### Installation
@@ -31,6 +31,24 @@ An HSL color picker, dropper, color analyzer and palette generator. The do it al
 _System warnings are normal due to lack of Code Signing_
 
 ### Usage
+
+#### Picker
+
+<img src="https://s3-us-west-1.amazonaws.com/color-tool-remix/color-tool-1.gif" width='500' />
+
+- Slide color bars and click the Add Color button
+- Fine tune levels with Value Inputs
+- Parse a string from HSL, RGB or HEX source
+- Generate a random color for fun
+- Copy color string in HSL, RGB or HEX format, with or without alpha channel
+
+#### Palettes
+
+#### Dropper
+
+<img src="https://s3-us-west-1.amazonaws.com/color-tool-remix/color-tool-3.gif" width='500' />
+
+- Add a color from a single pixel anywhere on your computer screen
 
 #### User Interface
 
@@ -57,17 +75,13 @@ _System warnings are normal due to lack of Code Signing_
 
 ---
 
-#### Picker
+#### Tech Stack
 
-<img src="https://s3-us-west-1.amazonaws.com/color-tool-remix/color-tool-1.gif" width='500' />
-
-- Slide color bars and click the Add Color button
-- Fine tune levels with Value Inputs
-- Parse a string from HSL, RGB or HEX source
-- Generate a random color for fun
-
-#### Dropper
-
-<img src="https://s3-us-west-1.amazonaws.com/color-tool-remix/color-tool-3.gif" width='500' />
-
-- Add a color from a single pixel anywhere on your computer screen
+|       Package       |                       Description                       |                    Link                    |
+| :-----------------: | :-----------------------------------------------------: | :----------------------------------------: |
+|     `electron`      | Build cross platform apps with JavaScript, HTML and CSS |      [Docs](https://electronjs.org/)       |
+| `electron-webpack`  |           Compile Electron code with Webpack            |  [Docs](https://webpack.electron.build/)   |
+| `electron-builder`  |    Package and build Electron apps for distribution     |    [Docs](https://www.electron.build/)     |
+|       `react`       |     JavaScript library for building user interfaces     |        [Docs](https://reactjs.org/)        |
+|     `react-dom`     |         React package for working with the DOM          | [Repo](https://github.com/facebook/react)  |
+| `styled-components` |         Visual primitives for the component age         | [Docs](https://www.styled-components.com/) |
