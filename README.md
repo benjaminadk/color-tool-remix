@@ -116,7 +116,7 @@ _Capture the entire color theme of a website, application or photo_
 |       Alpha Mode       | Toggle alpha component in color  | Boolean | `false` |
 |     Always On Top      |     Pin app to top of window     | Boolean | `false` |
 |     Palette Format     | Color string format in Palettes  | String  | `'hsl'` |
-|   Dropper Hightlight   |    Highlight color in Dropper    | String  |  `red`  |
+|   Dropper Hightlight   |    Highlight color in Dropper    | String  | `'red'` |
 | Dropper Analyzer Count | # of colors returned by Analyzer | Number  |   `8`   |
 
 ### Tech Stack

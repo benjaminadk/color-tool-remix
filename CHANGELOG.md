@@ -9,14 +9,20 @@
 ### Added
 
 - Add `macOS` build
-- Add confirm/alert/prompt electron component based on `electron-prompt`
+- Add confirm/alert/prompt electron component with`electron-prompt-benjaminadk` fork
 - Add name property to Color object
-- Palettes UI with copy to clipbard for `scss` or `css variables`
+- Palettes UI with copy to clipbard `name: color string`
+- Add help button to Project Mode
 
 ### Changed
 
 - Began work on README documentation
 - Refactor file structure to eliminate extra files
+- Rename Mini Tool to Project Mode
+
+### Fix
+
+- Tray context menu Project Mode now opens window with correct dimensions
 
 ## 1.0.0 2018-12-15
 
