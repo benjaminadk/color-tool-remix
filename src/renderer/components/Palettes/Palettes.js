@@ -1,13 +1,13 @@
 import React from 'react'
 import { remote } from 'electron'
 import styled from 'styled-components'
+import prompt from 'electron-prompt-benjaminadk'
 import NoPalettes from './NoPalettes'
 import TitleList from './TitleList'
 import Cube from './Cube'
 import IconRow from './IconRow'
 import ColorRow from './ColorRow'
 import copyToClipboard from '../../lib/copyToClipboard'
-import prompt from 'common/electronPopup'
 
 export const Container = styled.div`
   height: calc(100vh - 50px);

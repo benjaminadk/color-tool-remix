@@ -16,7 +16,7 @@
     "color-string": "^1.5.3",
     "doc-ready": "^1.0.4",
     "electron-devtools-installer": "^2.2.4",
-    "electron-prompt": "^1.2.0",
+    "electron-prompt-benjaminadk": "^1.0.3",
     "electron-updater": "^4.0.6",
     "prop-types": "^15.6.2",
     "react": "^16.4.0",
