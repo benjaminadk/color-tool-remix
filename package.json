@@ -1,6 +1,6 @@
 {
   "name": "electron-picker-remix",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A comprehensive desktop color ulitity",
   "repository": "https://github.com/benjaminadk/color-tool-remix",
   "main": "./dist/main/main.js",
@@ -16,7 +16,7 @@
     "color-string": "^1.5.3",
     "doc-ready": "^1.0.4",
     "electron-devtools-installer": "^2.2.4",
-    "electron-prompt-benjaminadk": "^1.0.3",
+    "electron-prompt-benjaminadk": "^1.0.6",
     "electron-updater": "^4.0.6",
     "prop-types": "^15.6.2",
     "react": "^16.4.0",

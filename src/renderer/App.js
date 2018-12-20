@@ -146,7 +146,7 @@ export default class App extends React.Component {
       cancel: 'Cancel',
       type: 'confirm'
     }
-    const deleteSwatch = await prompt(options, mainWin)
+    const deleteSwatch = await prompt(options, mainWin, process.platform)
     if (deleteSwatch) {
       const { colors } = this.state
       const newColors = colors.filter((color, index) => index !== i)
@@ -169,7 +169,7 @@ export default class App extends React.Component {
       cancel: 'Cancel',
       type: 'confirm'
     }
-    const cs = await prompt(options, mainWin)
+    const cs = await prompt(options, mainWin, process.platform)
     if (cs) this.createColors()
   }
 
@@ -231,7 +231,7 @@ export default class App extends React.Component {
       message: 'Your palette has been saved.',
       ok: 'Cool'
     })
-    await prompt(options2, mainWin)
+    await prompt(options2, mainWin, process.platform)
   }
 
   // load a saved palette into the active palette
@@ -252,7 +252,7 @@ export default class App extends React.Component {
       cancel: 'Cancel',
       type: 'confirm'
     }
-    const deletePalette = await prompt(options, mainWin)
+    const deletePalette = await prompt(options, mainWin, process.platform)
     if (deletePalette) {
       const { palettes } = this.state
       const newPalettes = palettes.filter((palette, index) => index !== i)
@@ -496,7 +496,7 @@ export default class App extends React.Component {
       type: 'input',
       inputAttrs: { type: 'text', placeholder: 'Enter HSL, RGB or HEX value' }
     }
-    const cs = await prompt(options, mainWin)
+    const cs = await prompt(options, mainWin, process.platform)
     // exit if cancelled
     if (!cs) return
     // otherwise attempt to parse
@@ -554,7 +554,7 @@ export default class App extends React.Component {
       value: c.name,
       inputAttrs: { type: 'text', placeholder: 'Enter exact text ex: $primary, --dark-pink' }
     }
-    const name = await prompt(options, mainWin)
+    const name = await prompt(options, mainWin, process.platform)
     // exit if cancelled
     if (!name) return
     else {

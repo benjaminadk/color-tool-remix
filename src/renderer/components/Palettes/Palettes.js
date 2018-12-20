@@ -102,7 +102,7 @@ export default class Palettes extends React.Component {
       ok: 'I Get It',
       type: 'alert'
     }
-    prompt(options, remote.getCurrentWindow())
+    prompt(options, remote.getCurrentWindow(), process.platform)
   }
 
   getFormatted = (color, format) => {

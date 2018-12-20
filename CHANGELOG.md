@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+## 1.0.2 2018-12-19
+
+## Add
+
+- Add custom icon to prompt/alert/confirm
+
+## Fix
+
+- Icon paths on `macOS` changed to `icns` version of icon
+
 ## 1.0.1 2018-12-17
 
 ### Added

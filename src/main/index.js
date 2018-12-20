@@ -6,7 +6,7 @@ import path from 'path'
 
 const firstInstance = app.requestSingleInstanceLock()
 const inDev = process.env.NODE_ENV === 'development'
-const icon = path.join(__static, 'icon.ico')
+const icon = path.join(__static, process.platform === 'darwin' ? 'icon.icns' : 'icon.ico')
 let mainWin, tray
 
 function createMainWindow() {
