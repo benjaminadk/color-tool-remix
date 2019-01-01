@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
+### Added
+
+### Changed
+
+- Upgraded to Electron v4.0.0
+
+### Fixed
+
+- Fixed cursors on color bars, buttons, inputs
+
 ## 1.0.2 2018-12-19
 
-## Add
+### Add
 
 - Add custom icon to prompt/alert/confirm
 
-## Fix
+### Fix
 
 - Icon paths on `macOS` changed to `icns` version of icon
 
