@@ -305,7 +305,7 @@ export default class App extends React.Component {
     })
     // runs same endpoint as main window
     dropWin.loadURL(endpoint(inDev))
-    // dropWin.webContents.openDevTools({ mode: 'bottom' })
+    // dropWin.webContents.openDevTools({ mode: 'detach' })
     dropWin.on(close, () => {
       dropWin = null
     })

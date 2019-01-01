@@ -33,6 +33,7 @@ const ReadOnly = styled.input.attrs({
   font-size: ${props => props.theme.smallerFontSize};
   text-align: center;
   border: none;
+  cursor: default;
   user-select: none;
   &::selection {
     background: transparent;
@@ -40,9 +41,9 @@ const ReadOnly = styled.input.attrs({
 `
 
 export default props => (
-  <Output copied={props.copied} value={props.value}>
+  <Output copied={props.copied} value={props.value} onClick={props.onClick}>
     <ReadOnly value={props.copied === props.index ? 'Copied to Clipboard' : props.value} />
-    <span title="Copy" onClick={props.onClick}>
+    <span title="Copy">
       <Clipboard color="#333333" size={14} />
     </span>
   </Output>

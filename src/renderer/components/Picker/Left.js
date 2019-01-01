@@ -88,15 +88,17 @@ export default class ColorBars extends React.Component {
     const onMouseMoveHue = e => this.setState({ hueLeft: `${this.getPosition(e)}` })
 
     const onMouseUpHue = e => {
-      this.setColor(e, 'hue')
       document.body.removeEventListener('mousemove', onMouseMoveHue)
       document.body.removeEventListener('mouseup', onMouseUpHue)
+      this.setCursor('hue', false)
+      this.setColor(e, 'hue')
     }
 
     this.hue.current.addEventListener('mousedown', e => {
-      this.setColor(e, 'hue')
       document.body.addEventListener('mousemove', onMouseMoveHue)
       document.body.addEventListener('mouseup', onMouseUpHue)
+      this.setCursor('hue', true)
+      this.setColor(e, 'hue')
     })
 
     for (let i = 0; i <= 100; i++) {
@@ -126,43 +128,49 @@ export default class ColorBars extends React.Component {
     const onMouseMoveSat = e => this.setState({ satLeft: `${this.getPosition(e)}` })
 
     const onMouseUpSat = e => {
-      this.setColor(e, 'sat')
       document.body.removeEventListener('mousemove', onMouseMoveSat)
       document.body.removeEventListener('mouseup', onMouseUpSat)
+      this.setCursor('sat', false)
+      this.setColor(e, 'sat')
     }
 
     this.sat.current.addEventListener('mousedown', e => {
-      this.setColor(e, 'sat')
       document.body.addEventListener('mousemove', onMouseMoveSat)
       document.body.addEventListener('mouseup', onMouseUpSat)
+      this.setCursor('sat', true)
+      this.setColor(e, 'sat')
     })
 
     const onMouseMoveLit = e => this.setState({ litLeft: `${this.getPosition(e)}` })
 
     const onMouseUpLit = e => {
-      this.setColor(e, 'lit')
       document.body.removeEventListener('mousemove', onMouseMoveLit)
       document.body.removeEventListener('mouseup', onMouseUpLit)
+      this.setCursor('lit', false)
+      this.setColor(e, 'lit')
     }
 
     this.lit.current.addEventListener('mousedown', e => {
-      this.setColor(e, 'lit')
       document.body.addEventListener('mousemove', onMouseMoveLit)
       document.body.addEventListener('mouseup', onMouseUpLit)
+      this.setCursor('lit', true)
+      this.setColor(e, 'lit')
     })
 
     const onMouseMoveOpa = e => this.setState({ opaLeft: `${this.getPosition(e)}` })
 
     const onMouseUpOpa = e => {
-      this.setColor(e, 'opa')
       document.body.removeEventListener('mousemove', onMouseMoveOpa)
       document.body.removeEventListener('mouseup', onMouseUpOpa)
+      this.setCursor('opa', false)
+      this.setColor(e, 'opa')
     }
 
     this.opa.current.addEventListener('mousedown', e => {
-      this.setColor(e, 'opa')
       document.body.addEventListener('mousemove', onMouseMoveOpa)
       document.body.addEventListener('mouseup', onMouseUpOpa)
+      this.setCursor('opa', true)
+      this.setColor(e, 'opa')
     })
   }
 
@@ -188,6 +196,19 @@ export default class ColorBars extends React.Component {
       this.setState({ opa, opaLeft: pos })
     }
     this.updatePickerBars()
+  }
+
+  setCursor = (mode, bool) => {
+    const modeCap = mode[0].toUpperCase() + mode.slice(1)
+    if (bool) {
+      this[mode].current.style.setProperty('cursor', 'grabbing')
+      this[`thumb${modeCap}`].current.style.setProperty('cursor', 'grabbing')
+      document.body.style.setProperty('cursor', 'grabbing')
+    } else {
+      this[mode].current.style.setProperty('cursor', 'pointer')
+      this[`thumb${modeCap}`].current.style.setProperty('cursor', 'grab')
+      document.body.style.setProperty('cursor', 'default')
+    }
   }
 
   onSwatchSelect = props => {
@@ -240,7 +261,7 @@ export default class ColorBars extends React.Component {
   copyColorString = (text, copied) => {
     copyToClipboard(text)
     this.setState({ copied }, () => {
-      setTimeout(() => this.setState({ copied: null }), 2500)
+      setTimeout(() => this.setState({ copied: null }), 5000)
     })
   }
 

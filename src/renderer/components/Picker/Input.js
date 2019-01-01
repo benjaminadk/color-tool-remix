@@ -40,7 +40,7 @@ const Input = styled.div`
       text-align: center;
       border: ${props => props.theme.border};
       &::selection {
-        background: ${props => `hsl(${props.hue}, 100%, 50%)`};
+        background: none;
       }
     }
   }

@@ -9,6 +9,7 @@ const Bar = styled.div`
   align-items: center;
   margin-bottom: 15px;
   border: ${props => props.theme.border};
+  cursor: pointer;
   user-select: none;
   .hue-slice,
   .sat-slice,
@@ -23,6 +24,7 @@ const Bar = styled.div`
     position: absolute;
     border: ${props => props.theme.border};
     background: rgba(0, 0, 0, 0.2);
+    cursor: grab;
     transition: all 0.05s ease-out;
   }
 `
