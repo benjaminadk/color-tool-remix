@@ -67,7 +67,12 @@ export default class ColorBars extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.h !== this.props.h || prevProps.l !== this.props.l) {
+    if (
+      prevProps.h !== this.props.h ||
+      prevProps.s !== this.props.s ||
+      prevProps.l !== this.props.l ||
+      prevProps.a !== this.props.a
+    ) {
       this.onSwatchSelect(this.props)
     }
   }

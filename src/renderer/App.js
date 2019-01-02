@@ -44,14 +44,10 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    const windowId = remote.getCurrentWindow().id
-    this.setState({ windowId }, () => {
-      if (windowId === 1) {
-        this.initColors()
-        this.initPalettes()
-      }
-      this.initOptions()
-    })
+    this.setState({ windowId: remote.getCurrentWindow().id })
+    this.initColors()
+    this.initPalettes()
+    this.initOptions()
 
     ipcRenderer.on('picker.large', () => {
       console.log('renderer received --> [picker.large]')
@@ -356,8 +352,8 @@ export default class App extends React.Component {
   }
 
   onSwatchClick = c => {
-    if (!c) return
-    var [_, h, s, l, a] = getHSLParts(c.color)
+    if (c.clean) return
+    const [_, h, s, l, a] = getHSLParts(c.color)
     this.setState({ h, s, l, a })
   }
 

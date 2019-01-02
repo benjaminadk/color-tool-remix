@@ -8,7 +8,7 @@
 
 ### Changed
 
-- Upgraded to Electron v4.0.0
+- Upgraded to Electron v3.0.13
 
 ### Fixed
 

@@ -34,7 +34,7 @@ export default props => (
       props.colors.map((c, i) => (
         <Swatch
           key={i}
-          onClick={() => props.onSwatchClick(c.clean ? null : c)}
+          onClick={() => props.onSwatchClick(c)}
           onContextMenu={e => props.onContextMenu(e, c, i)}
         >
           <Inner background={c.color} />
