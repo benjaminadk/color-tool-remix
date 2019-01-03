@@ -18,6 +18,7 @@ const CanvasStack = styled.div`
     border: none;
     margin: 0;
     padding: 0;
+    cursor: pointer;
   }
   .stack-row {
     width: ${props => props.theme.dropperWidth};
@@ -30,6 +31,7 @@ const CanvasStack = styled.div`
       width: 100px;
       height: 100px;
       border: 1px solid;
+      cursor: ${props => (props.frozen ? 'default' : 'none')};
 
       #c1 {
         position: absolute;
@@ -60,7 +62,7 @@ const CanvasStack = styled.div`
 `
 
 export default props => (
-  <CanvasStack>
+  <CanvasStack frozen={props.frozen}>
     <button onClick={props.shiftCanvasUp}>
       <KeyboardArrowUp color="#333333" size={20} />
     </button>

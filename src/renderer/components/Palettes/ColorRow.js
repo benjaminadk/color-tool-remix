@@ -57,7 +57,7 @@ export default ({ color, name, hsl, accentColor }) => {
   return (
     <Item color={color} hsl={hsl} accentColor={accentColor}>
       <div className="left">{color}</div>
-      <div className="center">{name || 'no name'}</div>
+      <div className="center">{name || '------'}</div>
       <div className="right">
         <button>
           <Clipboard className="icon" title="Copy" />

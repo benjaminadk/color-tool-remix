@@ -29,6 +29,8 @@ const Container = styled.div`
     background: ${props => props.theme.offWhite};
     outline: ${props => props.theme.border};
     opacity: ${props => (props.loading ? 0 : 1)};
+    cursor: default;
+    box-shadow: ${props => props.theme.shadows[1]};
   }
 `
 
@@ -327,6 +329,7 @@ export default class Dropper extends React.Component {
             width={canvasSize}
             height={canvasSize}
             options={this.props.options}
+            frozen={this.state.frozen}
             setBoxIndex={this.setBoxIndex}
             shiftCanvasUp={this.shiftCanvasUp}
             shiftCanvasRight={this.shiftCanvasRight}

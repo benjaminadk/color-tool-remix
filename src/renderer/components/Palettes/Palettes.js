@@ -19,7 +19,7 @@ export const Container = styled.div`
   padding: 0.5rem;
 `
 
-const Display = styled.div`
+const Palette = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -117,7 +117,7 @@ export default class Palettes extends React.Component {
       const { name, colors } = palettes[index]
       return (
         <Container>
-          <Display length={colors.filter(c => !c.clean).length}>
+          <Palette length={colors.filter(c => !c.clean).length}>
             <div className="top">
               <Actions
                 accentColor={accentColor}
@@ -143,7 +143,7 @@ export default class Palettes extends React.Component {
                 )
               })}
             </div>
-          </Display>
+          </Palette>
           <TitleList palettes={palettes} index={index} setIndex={this.setIndex} />
         </Container>
       )

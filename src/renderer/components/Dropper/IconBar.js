@@ -12,12 +12,14 @@ const IconBar = styled.div`
     background: transparent;
     color: ${props => props.theme.black};
     border: none;
+    cursor: pointer;
     &:hover {
       color: ${props => props.accentColor};
     }
   }
   .draggable {
     -webkit-app-region: drag;
+    cursor: grab;
   }
 `
 
@@ -28,16 +30,16 @@ export default props => (
     <button className="draggable">
       <DragHandle size={size} color="inherit" />
     </button>
-    <button onClick={props.selectColor}>
+    <button onClick={props.selectColor} title="Select Color">
       <CheckCircle size={size} color="inherit" />
     </button>
-    <button onClick={props.analyzePixels}>
+    <button onClick={props.analyzePixels} title="Analyzer">
       <Fingerprint size={size} color="inherit" />
     </button>
-    <button onClick={props.refresh}>
+    <button onClick={props.refresh} title="Refresh">
       <Refresh size={size} color="inherit" />
     </button>
-    <button onClick={props.exit}>
+    <button onClick={props.exit} title="Exit">
       <Cancel size={size} color="inherit" />
     </button>
   </IconBar>
