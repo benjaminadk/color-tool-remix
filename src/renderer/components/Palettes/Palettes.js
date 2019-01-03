@@ -5,7 +5,7 @@ import prompt from 'electron-prompt-benjaminadk'
 import NoPalettes from './NoPalettes'
 import TitleList from './TitleList'
 import Cube from './Cube'
-import IconRow from './IconRow'
+import Actions from './Actions'
 import ColorRow from './ColorRow'
 import copyToClipboard from '../../lib/copyToClipboard'
 import getHSLParts from '../../lib/getHSLParts'
@@ -14,44 +14,32 @@ import getRGBString from '../../lib/getRGBString'
 export const Container = styled.div`
   height: calc(100vh - 50px);
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 1fr 200px;
+  grid-gap: 2rem;
   padding: 0.5rem;
 `
 
 const Display = styled.div`
-  height: 95%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   .top {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 2fr 1.5fr;
+    grid-template-columns: auto 1fr 50px;
     margin: 0;
     padding: 0;
     background: white;
     border: ${props => props.theme.border};
+    box-shadow: ${props => props.theme.shadows[1]};
     p {
       justify-self: center;
-      font-family: 'Oswald';
-      font-size: 2.5rem;
+      align-self: center;
+      font-size: 2rem;
       text-align: center;
       margin: 0;
       padding: 0;
-    }
-    .actions {
-      align-self: flex-end;
-      justify-self: flex-end;
-      button {
-        background: white;
-        color: ${props => props.theme.black};
-        border: none;
-        cursor: pointer;
-        transition: all 0.25s;
-        &:hover {
-          color: dodgerblue;
-        }
-      }
     }
   }
   .grid {
@@ -121,7 +109,7 @@ export default class Palettes extends React.Component {
     const {
       setMode,
       palettes,
-      options: { paletteFormat }
+      options: { paletteFormat, accentColor }
     } = this.props
     if (!palettes.length) {
       return <NoPalettes setMode={setMode} />
@@ -129,17 +117,17 @@ export default class Palettes extends React.Component {
       const { name, colors } = palettes[index]
       return (
         <Container>
-          <TitleList palettes={palettes} index={index} setIndex={this.setIndex} />
           <Display length={colors.filter(c => !c.clean).length}>
             <div className="top">
-              <Cube colors={colors} />
-              <p>{name}</p>
-              <IconRow
+              <Actions
+                accentColor={accentColor}
                 setMode={() => this.props.setMode(0)}
                 copyAsVariables={this.copyAsVariables}
                 loadPalette={() => this.props.loadPalette(palettes[index])}
                 handleDelete={() => this.handleDelete(index, name)}
               />
+              <p>{name}</p>
+              <Cube colors={colors} />
             </div>
             <div className="grid">
               {colors.map((c, i) => {
@@ -150,11 +138,13 @@ export default class Palettes extends React.Component {
                     hsl={c.color}
                     color={this.getFormatted(c.color, paletteFormat)}
                     name={c.name}
+                    accentColor={accentColor}
                   />
                 )
               })}
             </div>
           </Display>
+          <TitleList palettes={palettes} index={index} setIndex={this.setIndex} />
         </Container>
       )
     }

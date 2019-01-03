@@ -1,7 +1,7 @@
 const defaultOptions = {
   alphaMode: false,
   alwaysOnTop: false,
-  dropperHighlightColor: 'red',
+  accentColor: 'dodgerblue',
   dropperAnalyzerCount: 8,
   paletteFormat: 'hsl'
 }

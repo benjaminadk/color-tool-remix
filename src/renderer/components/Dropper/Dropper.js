@@ -26,7 +26,7 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     margin: 3rem 3rem 0 0;
-    background: ${props => props.theme.white};
+    background: ${props => props.theme.offWhite};
     outline: ${props => props.theme.border};
     opacity: ${props => (props.loading ? 0 : 1)};
   }

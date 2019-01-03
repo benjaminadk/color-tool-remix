@@ -77,7 +77,7 @@ export default props => (
               key={i}
               index={i}
               selectedIndex={props.boxIndex}
-              outlineColor={props.options.dropperHighlightColor}
+              outlineColor={props.options.accentColor}
               onClick={() => props.setBoxIndex(i)}
             />
           ))}

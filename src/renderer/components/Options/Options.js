@@ -3,14 +3,12 @@ import styled from 'styled-components'
 
 const Container = styled.div`
   padding: 1rem;
-
   .title {
     font-size: 2rem;
     margin-top: 0;
     margin-bottom: 1rem;
     border-bottom: 1px solid ${props => props.theme.black};
   }
-
   .options {
     display: grid;
     grid-template-rows: repeat(5, auto);
@@ -19,7 +17,6 @@ const Container = styled.div`
       margin-bottom: 0.5rem;
     }
   }
-
   .alpha,
   .onTop,
   .palette-format,
@@ -32,20 +29,23 @@ const Container = styled.div`
     justify-self: space-between;
     label {
       font-size: ${props => props.theme.smallerFontSize};
+      font-family: 'Inconsolata', Arial, Helvetica, sans-serif;
     }
     input {
       text-align: center;
       justify-self: end;
       margin: 0;
       padding: 0.5rem;
-      font-family: 'Oswald';
+      font-family: 'Inconsolata', Arial, Helvetica, sans-serif;
+    }
+    input[type='checkbox'] {
+      transform: scale(1.5);
     }
     input[type='number'] {
       width: 85px;
       outline: none;
     }
   }
-
   .highlight {
     width: 300px;
     display: grid;
@@ -56,16 +56,14 @@ const Container = styled.div`
       font-size: ${props => props.theme.smallerFontSize};
     }
   }
-
   select,
   option {
     width: 100px;
     text-align: center;
     padding: 0.5rem;
-    font-family: 'Oswald';
+    font-family: 'Inconsolata', Arial, Helvetica, sans-serif;
     outline: none;
   }
-
   button {
     width: 100px;
     background: white;
@@ -79,7 +77,6 @@ const Container = styled.div`
       color: white;
     }
   }
-
   .palette-format > select {
     justify-self: end;
   }
@@ -101,7 +98,7 @@ export default class Options extends React.Component {
     alphaMode: false,
     alwaysOnTop: false,
     paletteFormat: 'hsl',
-    dropperHighlightColor: 'red',
+    accentColor: 'red',
     dropperAnalyzerCount: 8
   }
 
@@ -122,7 +119,7 @@ export default class Options extends React.Component {
       alphaMode: this.state.alphaMode,
       alwaysOnTop: this.state.alwaysOnTop,
       paletteFormat: this.state.paletteFormat,
-      dropperHighlightColor: this.state.dropperHighlightColor,
+      accentColor: this.state.accentColor,
       dropperAnalyzerCount: this.state.dropperAnalyzerCount
     }
     this.props.saveOptions(options)
@@ -170,13 +167,9 @@ export default class Options extends React.Component {
           </div>
 
           <div className="highlight">
-            <label htmlFor="dropperHighlightColor">Dropper Highlight</label>
-            <Square color={this.state.dropperHighlightColor} />
-            <select
-              name="dropperHighlightColor"
-              value={this.state.dropperHighlightColor}
-              onChange={this.handleChange}
-            >
+            <label htmlFor="accentColor">Accent Color</label>
+            <Square color={this.state.accentColor} />
+            <select name="accentColor" value={this.state.accentColor} onChange={this.handleChange}>
               {colors.map(color => (
                 <option key={color} value={color}>
                   {color}

@@ -10,7 +10,6 @@ const NoPalettes = styled.div`
     background: white;
     color: ${props => props.theme.black};
     font-size: 3rem;
-    font-family: 'Oswald';
     padding: 1rem;
     margin: 0;
     border: ${props => props.theme.border};

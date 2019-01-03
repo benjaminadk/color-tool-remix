@@ -49,7 +49,8 @@ export default class ColorBars extends React.Component {
       satLeft: 352,
       litLeft: 172,
       opaLeft: 352,
-      copied: null
+      copied: null,
+      grab: false
     }
 
     this.hue = React.createRef()
@@ -204,14 +205,11 @@ export default class ColorBars extends React.Component {
   }
 
   setCursor = (mode, bool) => {
-    const modeCap = mode[0].toUpperCase() + mode.slice(1)
     if (bool) {
-      this[mode].current.style.setProperty('cursor', 'grabbing')
-      this[`thumb${modeCap}`].current.style.setProperty('cursor', 'grabbing')
-      document.body.style.setProperty('cursor', 'grabbing')
+      this.setState({ grab: true })
+      document.body.style.setProperty('cursor', '-webkit-grabbing')
     } else {
-      this[mode].current.style.setProperty('cursor', 'pointer')
-      this[`thumb${modeCap}`].current.style.setProperty('cursor', 'grab')
+      this.setState({ grab: false })
       document.body.style.setProperty('cursor', 'default')
     }
   }
@@ -308,24 +306,28 @@ export default class ColorBars extends React.Component {
           thumbRef={this.thumbHue}
           left={this.state.hueLeft}
           show={true}
+          grab={this.state.grab}
         />
         <ColorBar
           barRef={this.sat}
           thumbRef={this.thumbSat}
           left={this.state.satLeft}
           show={true}
+          grab={this.state.grab}
         />
         <ColorBar
           barRef={this.lit}
           thumbRef={this.thumbLit}
           left={this.state.litLeft}
           show={true}
+          grab={this.state.grab}
         />
         <ColorBar
           barRef={this.opa}
           thumbRef={this.thumbOpa}
           left={this.state.opaLeft}
           show={this.props.options.alphaMode}
+          grab={this.state.grab}
         />
         <div className="inputs">
           <Input

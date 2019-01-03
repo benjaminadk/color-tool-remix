@@ -41,7 +41,6 @@ const MiniColor = styled.div`
     bottom: 0;
     left: 0;
     font-size: 0.75rem;
-    font-family: 'Oswald';
     padding: 0 0.35rem;
     color: ${props => getContrastColor(props.color)};
   }

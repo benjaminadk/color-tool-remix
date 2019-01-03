@@ -18,10 +18,12 @@ export const ListItem = styled.p`
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: left;
+  text-align: center;
   white-space: nowrap;
-  background: ${props => (props.selected ? props.theme.black : 'transparent')};
-  color: ${props => (props.selected ? 'white' : props.theme.black)};
+  background: ${props => (props.selected ? props.theme.white : 'transparent')};
+  color: ${props => props.theme.black};
+  border: ${props => (props.selected ? props.theme.border : 'none')};
+  box-shadow: ${props => props.theme.shadows[props.selected ? 1 : 0]};
 `
 
 export default ({ palettes, index, setIndex }) => (

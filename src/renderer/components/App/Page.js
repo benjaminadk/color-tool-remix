@@ -13,7 +13,7 @@ const StyledPage = styled.div`
   height: 100vh;
   width: 100vw;
   color: ${props => props.theme.black};
-  background: ${props => (id === 1 ? props.theme.white : 'transparent')};
+  background: ${props => (id === 1 ? props.theme.offWhite : 'transparent')};
 `
 
 export default class Page extends React.Component {

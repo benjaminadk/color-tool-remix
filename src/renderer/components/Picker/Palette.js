@@ -23,6 +23,7 @@ const Inner = styled.div`
   height: 75%;
   border: ${props => props.theme.border};
   background: ${props => (props.background === 'transparent' ? 'white' : props.background)};
+  box-shadow: ${props => props.theme.shadows[1]};
   &:hover {
     border: ${props => props.theme.hoverBorder};
   }

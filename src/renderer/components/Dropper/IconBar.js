@@ -13,7 +13,7 @@ const IconBar = styled.div`
     color: ${props => props.theme.black};
     border: none;
     &:hover {
-      color: ${props => props.dropperHighlightColor};
+      color: ${props => props.accentColor};
     }
   }
   .draggable {
@@ -24,7 +24,7 @@ const IconBar = styled.div`
 const size = 18
 
 export default props => (
-  <IconBar dropperHighlightColor={props.options.dropperHighlightColor}>
+  <IconBar accentColor={props.options.accentColor}>
     <button className="draggable">
       <DragHandle size={size} color="inherit" />
     </button>
