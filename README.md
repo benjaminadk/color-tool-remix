@@ -46,11 +46,33 @@ _System warnings are normal due to lack of Code Signing_
 
 _Create a color quickly, via a variety of input methods_
 
+- **Color Bars**
+  - Adjust Hue, Saturation, Lightness and Alpha Color Bars
+- **Fine Tuning**
+  - Adjust Hue, Saturation, Lightness and Alpha Input Values
+- **Color String Parser**
+  - Parses `hsl`, `rgb`, `hex` and `css named` colors
+- **Random Color**
+  - Generates a random color excluding white, blacks and greys
+- **Dropper**
+  - Select any pixel from the screen
+- **Generators**
+  - Mathematically generate colors from one base color
+
 #### Dropper
 
 <img src="https://s3-us-west-1.amazonaws.com/color-tool-remix/color-tool-3.gif" width='500' />
 
 _Select a single pixel from anywhere on your screen_
+
+**Usage**
+
+1. Open Dropper
+2. Click anywhere on screen - zoomed in area will be displayed
+3. Optional - adjust zoomed area with arrow buttons
+4. Select individual pixel
+5. Click the check icon to confirm selection
+6. New color will appear in palette
 
 #### Palettes
 
@@ -60,25 +82,38 @@ _Create, name, save and manage palettes for different projects_
 
 #### Generator
 
-Generate colors based on color theory
+<img src="https://s3-us-west-1.amazonaws.com/color-tool-remix/color-tool-7.gif" width='500'>
 
-- _*Complementary*_
+_Generate colors based on color theory_
 
-- _*Split Complementary*_
+- Right click color swatch and select a generator
 
-- _*Triad*_
+  - _*Complementary*_
 
-- _*Tetrad*_
+  - _*Split Complementary*_
 
-- _*Analagous*_
+  - _*Triad*_
 
-- _*Monochromatic*_
+  - _*Tetrad*_
+
+  - _*Analagous*_
+
+  - _*Monochromatic*_
 
 #### Project Mode
 
 <img src="https://s3-us-west-1.amazonaws.com/color-tool-remix/color-tool-6.gif" width="500" />
 
 _A minimal interface, ideal size for working on projects_
+
+- User Interface
+  - Displays 5 colors at a time
+  - Click color to copy color string to clipboard
+  - View color label to see ideal contrast color for text (dark or light)
+  - Click arrows to cycle through color palette
+  - Click `hsl`, `rgb` or `hex` to toggle output format
+  - Click 📌 to set window always on top
+  - Activate Dropper, restore full-size or open documentation
 
 #### Analyzer
 
@@ -113,24 +148,26 @@ _Capture the entire color theme of a website, application or photo_
 
 #### Options
 
-|         Option         |           Description            |  Type   | Default |
-| :--------------------: | :------------------------------: | :-----: | :-----: |
-|       Alpha Mode       | Toggle alpha component in color  | Boolean | `false` |
-|     Always On Top      |     Pin app to top of window     | Boolean | `false` |
-|     Palette Format     | Color string format in Palettes  | String  | `'hsl'` |
-|   Dropper Hightlight   |    Highlight color in Dropper    | String  | `'red'` |
-| Dropper Analyzer Count | # of colors returned by Analyzer | Number  |   `8`   |
+|         Option         |           Description            |  Type   |    Default     |
+| :--------------------: | :------------------------------: | :-----: | :------------: |
+|       Alpha Mode       | Toggle alpha component in color  | Boolean |    `false`     |
+|     Always On Top      |     Pin app to top of window     | Boolean |    `false`     |
+|     Palette Format     | Color string format in Palettes  | String  |    `'hsl'`     |
+|      Accent Color      |     Accent color for icon UI     | String  | `'dodgerblue'` |
+| Dropper Analyzer Count | # of colors returned by Analyzer | Number  |      `8`       |
 
 ### Tech Stack
 
-|       Package       |                       Description                       |                    Link                    |
-| :-----------------: | :-----------------------------------------------------: | :----------------------------------------: |
-|     `electron`      | Build cross platform apps with JavaScript, HTML and CSS |      [Docs](https://electronjs.org/)       |
-| `electron-webpack`  |           Compile Electron code with Webpack            |  [Docs](https://webpack.electron.build/)   |
-| `electron-builder`  |    Package and build Electron apps for distribution     |    [Docs](https://www.electron.build/)     |
-|       `react`       |     JavaScript library for building user interfaces     |        [Docs](https://reactjs.org/)        |
-|     `react-dom`     |         React package for working with the DOM          | [Repo](https://github.com/facebook/react)  |
-| `styled-components` |         Visual primitives for the component age         | [Docs](https://www.styled-components.com/) |
+|            Package            |                       Description                       |                          Link                          |
+| :---------------------------: | :-----------------------------------------------------: | :----------------------------------------------------: |
+|          `electron`           | Build cross platform apps with JavaScript, HTML and CSS |            [Docs](https://electronjs.org/)             |
+|      `electron-webpack`       |           Compile Electron code with Webpack            |        [Docs](https://webpack.electron.build/)         |
+|      `electron-builder`       |    Package and build Electron apps for distribution     |          [Docs](https://www.electron.build/)           |
+| `electron-prompt-benjaminadk` |       Custom fork to generate prompt/alert/confim       | [Repo](https://github.com/benjaminadk/electron-prompt) |
+|            `react`            |     JavaScript library for building user interfaces     |              [Docs](https://reactjs.org/)              |
+|          `react-dom`          |         React package for working with the DOM          |       [Repo](https://github.com/facebook/react)        |
+|      `styled-components`      |         Visual primitives for the component age         |       [Docs](https://www.styled-components.com/)       |
+|        `color-string`         |            Parses a variety of color formats            |      [Repo](https://github.com/Qix-/color-string)      |
 
 ### Changelog
 

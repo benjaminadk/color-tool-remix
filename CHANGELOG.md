@@ -6,13 +6,17 @@
 
 ### Added
 
+- Add shadows to UI components
+- Expand README detail
+
 ### Changed
 
 - Upgraded to Electron v3.0.13
+- Refactor Palettes UI
 
 ### Fixed
 
-- Fixed cursors on color bars, buttons, inputs
+- Fixed cursors on color bars, buttons, inputs, dropper
 
 ## 1.0.2 2018-12-19
 

@@ -1,5 +1,5 @@
 const defaultOptions = {
-  alphaMode: false,
+  alphaMode: true,
   alwaysOnTop: false,
   accentColor: 'dodgerblue',
   dropperAnalyzerCount: 8,

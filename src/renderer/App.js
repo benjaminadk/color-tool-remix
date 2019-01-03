@@ -133,7 +133,7 @@ export default class App extends React.Component {
   // delete a single color swatch
   deleteColor = async i => {
     const options = {
-      height: 200,
+      height: 180,
       title: 'Confirm',
       label: 'Delete Color Swatch',
       message:
@@ -240,10 +240,10 @@ export default class App extends React.Component {
   // delete a palette from disk
   deletePalette = async (i, name) => {
     const options = {
-      height: 175,
+      height: 160,
       title: 'Confirm',
       label: 'Delete Palette',
-      message: `This will permanently delete ${name}. Are you sure?`,
+      message: `Delete "${name}" permanently?`,
       ok: 'Delete',
       cancel: 'Cancel',
       type: 'confirm'
@@ -258,6 +258,7 @@ export default class App extends React.Component {
     }
     return false
   }
+
   // initializes the dropper
   initDropper = () => {
     // IPC message from dropper with new color to save
@@ -365,11 +366,6 @@ export default class App extends React.Component {
       { label: 'Color Generators', enabled: false },
       { type: 'separator' },
       {
-        label: 'Color Name',
-        click: () => this.openNameColorPrompt(c, i),
-        icon: getStaticFile('name-16x16.png')
-      },
-      {
         label: 'Complementary',
         click: () => this.makeCompColor(c, i),
         icon: getStaticFile('comp-16x16.png')
@@ -400,6 +396,13 @@ export default class App extends React.Component {
         icon: getStaticFile('mono-16x16.png')
       },
       { type: 'separator' },
+      { label: 'Color Options', enabled: false },
+      { type: 'separator' },
+      {
+        label: 'Set Color Name',
+        click: () => this.openNameColorPrompt(c, i),
+        icon: getStaticFile('name-16x16.png')
+      },
       { label: 'Delete Color', click: () => this.deleteColor(i), icon: getStaticFile('delete.png') }
     ]
     const menu = remote.Menu.buildFromTemplate(template)

@@ -1,7 +1,5 @@
 import React from 'react'
-import { remote } from 'electron'
 import styled from 'styled-components'
-import prompt from 'electron-prompt-benjaminadk'
 import NoPalettes from './NoPalettes'
 import TitleList from './TitleList'
 import Cube from './Cube'
@@ -81,16 +79,6 @@ export default class Palettes extends React.Component {
       }
     })
     copyToClipboard(str)
-    const options = {
-      height: 200,
-      title: 'Success',
-      label: 'Copied Text',
-      message:
-        'Your color names and values have been copied to your clipboard in css/scss variable style.',
-      ok: 'I Get It',
-      type: 'alert'
-    }
-    prompt(options, remote.getCurrentWindow(), process.platform)
   }
 
   getFormatted = (color, format) => {

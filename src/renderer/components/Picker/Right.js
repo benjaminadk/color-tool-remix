@@ -48,6 +48,7 @@ export const Button = styled.button`
   padding: 0.5rem;
   cursor: pointer;
   transition: all 0.25s;
+  box-shadow: ${props => props.theme.shadows[1]};
   &:hover {
     background: ${props => props.theme.black};
     color: white;
