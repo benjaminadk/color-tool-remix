@@ -53,13 +53,13 @@ const Item = styled.div`
   }
 `
 
-export default ({ color, name, hsl, accentColor }) => {
+export default ({ color, name, hsl, accentColor, copied, copyToClipboard }) => {
   return (
     <Item color={color} hsl={hsl} accentColor={accentColor}>
-      <div className="left">{color}</div>
+      <div className="left">{copied ? 'Copied' : color}</div>
       <div className="center">{name || '------'}</div>
       <div className="right">
-        <button>
+        <button onClick={copyToClipboard}>
           <Clipboard className="icon" title="Copy" />
         </button>
       </div>

@@ -54,7 +54,9 @@ const Palette = styled.div`
 
 export default class Palettes extends React.Component {
   state = {
-    index: 0
+    index: 0,
+    copied: false,
+    copiedAll: false
   }
 
   handleDelete = (i, name) => {
@@ -66,6 +68,7 @@ export default class Palettes extends React.Component {
   setIndex = index => this.setState({ index })
 
   copyAsVariables = () => {
+    if (this.state.copiedAll !== false) return
     const { index } = this.state
     const {
       palettes,
@@ -79,6 +82,9 @@ export default class Palettes extends React.Component {
       }
     })
     copyToClipboard(str)
+    this.setState({ copiedAll: true }, () => {
+      setTimeout(() => this.setState({ copiedAll: false }), 5000)
+    })
   }
 
   getFormatted = (color, format) => {
@@ -90,6 +96,14 @@ export default class Palettes extends React.Component {
       cs = getRGBString(format === 'rgb', h, s, l)
     }
     return cs
+  }
+
+  copyToClipboard = (str, i) => {
+    if (this.state.copied !== false) return
+    copyToClipboard(str)
+    this.setState({ copied: i }, () => {
+      setTimeout(() => this.setState({ copied: false }), 5000)
+    })
   }
 
   render() {
@@ -114,19 +128,22 @@ export default class Palettes extends React.Component {
                 loadPalette={() => this.props.loadPalette(palettes[index])}
                 handleDelete={() => this.handleDelete(index, name)}
               />
-              <p>{name}</p>
+              <p>{this.state.copiedAll ? 'Copied All' : name}</p>
               <Cube colors={colors} />
             </div>
             <div className="grid">
               {colors.map((c, i) => {
                 if (c.clean) return null
+                const formatted = this.getFormatted(c.color, paletteFormat)
                 return (
                   <ColorRow
                     key={i}
                     hsl={c.color}
-                    color={this.getFormatted(c.color, paletteFormat)}
+                    color={formatted}
                     name={c.name}
                     accentColor={accentColor}
+                    copied={this.state.copied === i}
+                    copyToClipboard={() => this.copyToClipboard(formatted, i)}
                   />
                 )
               })}
