@@ -1,6 +1,6 @@
 {
   "name": "electron-picker-remix",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A comprehensive desktop color ulitity",
   "repository": "https://github.com/benjaminadk/color-tool-remix",
   "main": "./dist/main/main.js",
